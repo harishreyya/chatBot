@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Button, Modal } from "flowbite-react";
 import { FiUser } from "react-icons/fi";
 import { FaRobot} from "react-icons/fa";
+import SkeletonLoader from "@/components/SkeletonLoader";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -19,7 +20,8 @@ export default function Home() {
     }
   }, [status, router]);
 
-  if (status === "loading") return <div>Loading...</div>;
+ if (status === "loading") return <SkeletonLoader />;
+
 
   const handleLogout = () => {
     setIsLogoutModalOpen(false);
