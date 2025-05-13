@@ -8,13 +8,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  email         String    @unique
-  emailVerified DateTime?
-  createdAt     DateTime  @default(now())
-}
-
 model VerificationToken {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   identifier String
@@ -22,4 +15,30 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model User {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  email         String    @unique
+  emailVerified DateTime?
+  createdAt     DateTime  @default(now())
+  chats         Chat[]    @relation("UserChats")
+}
+
+model Chat {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  title     String?
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], name: "UserChats")
+  messages  Message[] @relation("ChatMessages")
+  createdAt DateTime  @default(now())
+}
+
+model Message {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  chatId    String
+  chat      Chat     @relation(fields: [chatId], references: [id], name: "ChatMessages")
+  role      String
+  content   String
+  createdAt DateTime @default(now())
 }

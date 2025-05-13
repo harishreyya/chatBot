@@ -7,6 +7,7 @@ import { Button, Modal } from "flowbite-react";
 import { FiUser } from "react-icons/fi";
 import { FaRobot} from "react-icons/fa";
 import SkeletonLoader from "@/components/SkeletonLoader";
+import Link from "next/link";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -37,6 +38,10 @@ export default function Home() {
     <span className="text-2xl font-bold text-white">AI Models</span>
     <span className="ml-4 pl-4 border-gray-600 text-lg text-gray-300">Dashboard</span>
   </div>
+
+  <Link href="/chat" className="px-4 py-2 bg-green-600 text-white rounded">
+  Go to Chatbot
+</Link>
 
   {session?.user?.email && (
     <div className="relative">

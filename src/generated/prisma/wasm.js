@@ -110,6 +110,13 @@ Prisma.NullTypes = {
  * Enums
  */
 
+exports.Prisma.VerificationTokenScalarFieldEnum = {
+  id: 'id',
+  identifier: 'identifier',
+  token: 'token',
+  expires: 'expires'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
@@ -117,11 +124,19 @@ exports.Prisma.UserScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
-exports.Prisma.VerificationTokenScalarFieldEnum = {
+exports.Prisma.ChatScalarFieldEnum = {
   id: 'id',
-  identifier: 'identifier',
-  token: 'token',
-  expires: 'expires'
+  title: 'title',
+  userId: 'userId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.MessageScalarFieldEnum = {
+  id: 'id',
+  chatId: 'chatId',
+  role: 'role',
+  content: 'content',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -136,8 +151,10 @@ exports.Prisma.QueryMode = {
 
 
 exports.Prisma.ModelName = {
+  VerificationToken: 'VerificationToken',
   User: 'User',
-  VerificationToken: 'VerificationToken'
+  Chat: 'Chat',
+  Message: 'Message'
 };
 
 /**
