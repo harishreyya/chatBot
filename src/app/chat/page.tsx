@@ -15,7 +15,7 @@ export default function ChatListPage() {
   const [isCreatingChat, setIsCreatingChat] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editTitle, setEditTitle] = useState("");
-  const [loadingActionId, setLoadingActionId] = useState<string | null>(null); // track editing or deleting
+  const [loadingActionId, setLoadingActionId] = useState<string | null>(null); 
 
   useEffect(() => {
     if (status === "authenticated") fetchChats();
