@@ -15,6 +15,7 @@ export default function ChatListPage() {
   const [isCreatingChat, setIsCreatingChat] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editTitle, setEditTitle] = useState("");
+  const [loadingActionId, setLoadingActionId] = useState<string | null>(null); // track editing or deleting
 
   useEffect(() => {
     if (status === "authenticated") fetchChats();
@@ -37,17 +38,21 @@ export default function ChatListPage() {
   };
 
   const updateChatTitle = async (chatId: string) => {
+    setLoadingActionId(chatId);
     await fetch("/api/chat/updateTitle", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ chatId, title: editTitle }),
     });
     setEditingId(null);
+    setLoadingActionId(null);
     fetchChats();
   };
 
   const deleteChat = async (chatId: string) => {
-   await fetch(`/api/chat/deleteChat?chatId=${chatId}`, { method: "DELETE" });
+    setLoadingActionId(chatId);
+    await fetch(`/api/chat/deleteChat?chatId=${chatId}`, { method: "DELETE" });
+    setLoadingActionId(null);
     fetchChats();
   };
 
@@ -98,9 +103,12 @@ export default function ChatListPage() {
                       />
                       <button
                         onClick={() => updateChatTitle(chat.id)}
-                        className="text-green-600 hover:text-green-800 cursor-pointer"
+                        disabled={loadingActionId === chat.id}
+                        className={`text-green-600 hover:text-green-800 cursor-pointer ${
+                          loadingActionId === chat.id ? "opacity-50 cursor-not-allowed" : ""
+                        }`}
                       >
-                        <FaSave />
+                        {loadingActionId === chat.id ? <FaSpinner className="animate-spin" /> : <FaSave />}
                       </button>
                     </>
                   ) : (
@@ -116,15 +124,19 @@ export default function ChatListPage() {
                           setEditTitle(chat.title);
                         }}
                         className="text-yellow-600 hover:text-yellow-800 cursor-pointer"
+                        disabled={loadingActionId === chat.id}
                       >
                         <FaEdit />
                       </button>
                     )}
                     <button
                       onClick={() => deleteChat(chat.id)}
-                      className="text-red-600 hover:text-red-800 cursor-pointer"
+                      disabled={loadingActionId === chat.id}
+                      className={`text-red-600 hover:text-red-800 cursor-pointer ${
+                        loadingActionId === chat.id ? "opacity-50 cursor-not-allowed" : ""
+                      }`}
                     >
-                      <FaTrash />
+                      {loadingActionId === chat.id ? <FaSpinner className="animate-spin" /> : <FaTrash />}
                     </button>
                   </div>
                 </li>
@@ -136,3 +148,4 @@ export default function ChatListPage() {
     </Layout>
   );
 }
+
