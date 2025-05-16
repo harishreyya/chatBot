@@ -34,12 +34,12 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <div className="min-h-screen bg-blue-50 flex flex-col">
-      <header className="flex items-center justify-between bg-gray-600 px-8 py-4 shadow-md">
-        <div className="flex items-center gap-3">
-          <FaRobot className="h-8 w-8 text-green-400" />
+      <header className="flex items-center justify-between bg-gray-400 px-8 py-4 shadow-md">
+      <Link href="/">  <div className="flex items-center gap-3">
+          <FaRobot className="h-8 w-8 text-gray-600" />
           <span className="text-2xl font-bold text-white">AI Models</span>
           {/*<span className="ml-4 pl-4 border-gray-600 text-lg text-gray-300">Dashboard</span>*/}
-        </div>
+        </div></Link>
 
         <Link href="/chat" className="px-4 py-2 bg-green-600 text-white rounded">
           Go to Chatbot
