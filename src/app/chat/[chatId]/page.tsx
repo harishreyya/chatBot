@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import Layout from "@/components/layout";
 
 export default function ChatPage() {
         // @ts-ignore
@@ -33,6 +34,7 @@ export default function ChatPage() {
   };
 
   return (
+    <Layout>
     <div className="p-8">
       <h1 className="text-xl font-bold mb-4">Chat</h1>
       <div className="space-y-2 mb-4">
@@ -61,5 +63,6 @@ export default function ChatPage() {
         </button>
       </div>
     </div>
+    </Layout>
   );
 }

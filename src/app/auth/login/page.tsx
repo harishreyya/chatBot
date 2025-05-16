@@ -67,25 +67,23 @@ export default function LoginPage() {
         >
   
   <div className="flex w-full h-1/3">
-    <img src="https://d3tx3wg2jy0sui.cloudfront.net/e1ed719a8b7e4dd4903782cb9986535e.png" className="w-1/3 h-full object-cover filter blur-3xl brightness-50" />
-    <img src="https://d3tx3wg2jy0sui.cloudfront.net/cb292bd0098a4c80b7a7a37fa1cafd36.png" className="w-1/3 h-full object-cover filter blur-3xl brightness-50" />
-    <img src="https://d3tx3wg2jy0sui.cloudfront.net/66892a9fc70e49d7aeb75e786d4d2d4b.png" className="w-1/3 h-full object-cover filter blur-3xl brightness-50" />
+    <img src="https://res.cloudinary.com/duoqzn6tv/image/upload/v1747404534/output_3_zdlmlc.png" className="w-1/3 h-full object-cover filter blur-3xl brightness-50" />
+    <img src="https://res.cloudinary.com/duoqzn6tv/image/upload/v1747404534/out-0_10_cfpgf1.png" className="w-1/3 h-full object-cover filter blur-3xl brightness-50" />
+    <img src="https://res.cloudinary.com/duoqzn6tv/image/upload/v1735191729/iuknrszm85an9grwzmsw.webp" className="w-1/3 h-full object-cover filter blur-3xl brightness-50" />
   </div>
 
  
   <div className="flex w-full h-1/3">
-    <img src="https://d3tx3wg2jy0sui.cloudfront.net/bb2efd396b6846fc928e9665c1f83c93.png" className="w-2/3 h-full object-cover filter blur-3xl brightness-50" />
-    <img src="https://d3tx3wg2jy0sui.cloudfront.net/c597072e455246eb806184a650027ef8.png" className="w-1/3 h-full object-cover filter blur-3xl brightness-50" />
+    <img src="https://res.cloudinary.com/duoqzn6tv/image/upload/v1747404532/output_2_hw0dof.png" className="w-1/3 h-full object-cover filter blur-3xl brightness-50" />
+    <img src="https://res.cloudinary.com/duoqzn6tv/image/upload/v1747404532/output_1_iyhlif.png" className="w-2/3 h-full object-cover filter blur-3xl brightness-50" />
   </div>
  
   <div className="flex w-full h-1/3">
-    <img src="https://d3tx3wg2jy0sui.cloudfront.net/c489a99be02a484ba2278b03ed808dfe.png" className="w-1/3 h-full object-cover filter blur-3xl brightness-50" />
-    <img src="https://d3tx3wg2jy0sui.cloudfront.net/ea78eee557a8491ab48071f08a97353f.png" className="w-1/3 h-full object-cover filter blur-3xl brightness-50" />
-    <img src="https://d3tx3wg2jy0sui.cloudfront.net/2f2b050e5a274668849501a03175adc8.png" className="w-1/3 h-full object-cover filter blur-3xl brightness-50" />
+    <img src="https://res.cloudinary.com/duoqzn6tv/image/upload/v1747404533/output_pb3lzi.png" className="w-1/3 h-full object-cover filter blur-3xl brightness-50" />
+    <img src="https://res.cloudinary.com/duoqzn6tv/image/upload/v1747404531/output_4_qcl2lh.png" className="w-1/3 h-full object-cover filter blur-3xl brightness-50" />
+    <img src="https://res.cloudinary.com/duoqzn6tv/image/upload/v1747404533/out-0_11_jhf0og.png" className="w-1/3 h-full object-cover filter blur-3xl brightness-50" />
   </div>
 </div>
-
-
       <div className="relative w-full max-w-md p-4">
         <Card className="bg-white bg-opacity-90 rounded-2xl shadow-xl border border-gray-200">
           <h1 className="text-2xl font-bold text-center mb-2 text-gray-800">
@@ -96,7 +94,6 @@ export default function LoginPage() {
             A one-time passcode (OTP) will be sent to your inbox for secure verification. 
             Please check your email after submission.
           </p>
-
           {!isOtpSent ? (
             <form className="flex flex-col gap-4">
               <div>

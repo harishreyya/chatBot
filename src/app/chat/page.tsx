@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Layout from "@/components/layout";
 
 export default function ChatListPage() {
   const { data: session, status } = useSession();
@@ -36,6 +37,7 @@ export default function ChatListPage() {
   if (status === "loading") return <div>Loading...</div>;
 
   return (
+    <Layout>
     <div className="p-8">
       <h1 className="text-2xl font-bold mb-4">Your Chats</h1>
       <button
@@ -54,5 +56,6 @@ export default function ChatListPage() {
         ))}
       </ul>
     </div>
+    </Layout>
   );
 }
