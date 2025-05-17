@@ -75,7 +75,7 @@ export default function ChatListPage() {
             onClick={startNewChat}
             disabled={isCreatingChat}
             className={`flex items-center gap-2 px-4 py-2 rounded ${
-              isCreatingChat ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700 text-white"
+              isCreatingChat ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700 text-white cursor-pointer"
             }`}
           >
             <FaPlus />
