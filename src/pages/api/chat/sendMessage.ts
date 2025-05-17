@@ -11,15 +11,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (!session || !session?.user?.id) {
     return res.status(401).json({ error: "Unauthorized" });
   }
-
-  console.log("session---",session)
-
   const { chatId, message } = req.body;
 
   if (!chatId || !message) {
     return res.status(400).json({ error: "Missing parameters" });
   }
-
 
   try {
     const apiResponse = await fetch('https://prod.api.market/api/v1/swift-api/gpt-3-5-turbo/chat/completions', {
