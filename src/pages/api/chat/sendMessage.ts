@@ -22,7 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       method: 'POST',
       headers: {
         'accept': 'application/json',
-        'x-magicapi-key': 'cmajmhr250001lb0468zv2s5s',
+        'x-magicapi-key': process.env.MAGIC_API_KEY as string,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -40,8 +40,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         { chatId, role: 'assistant', content: assistantReply }
       ]
     });
-
-    // res.status(200).send({ assistantReply });
+    
     res.status(200).json({ assistantReply: data.choices?.[0]?.message?.content || 'No response' });
 
   } catch (error) {
