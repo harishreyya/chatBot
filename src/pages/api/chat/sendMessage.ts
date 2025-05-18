@@ -41,7 +41,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       ]
     });
 
-    res.status(200).json({ assistantReply });
+    // res.status(200).send({ assistantReply });
+    res.status(200).json({ assistantReply: data.choices?.[0]?.message?.content || 'No response' });
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Something went wrong' });
