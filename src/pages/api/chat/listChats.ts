@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "@/lib/prisma";
 import { authOptions } from "../auth/[...nextauth]";
+import { subMinutes } from "date-fns";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "GET") return res.status(405).end();
@@ -19,19 +20,29 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       include: { messages: true },
     });
 
-    const emptyChatIds = chats
-      .filter(chat => chat.messages.length === 0)
+    const tenMinutesAgo = subMinutes(new Date(), 10);
+
+    const emptyChatIdsToDelete = chats
+      .filter(chat => chat.messages.length === 0 && new Date(chat.createdAt) < tenMinutesAgo)
       .map(chat => chat.id);
 
-    if (emptyChatIds.length > 0) {
+    if (emptyChatIdsToDelete.length > 0) {
       await prisma.chat.deleteMany({
-        where: { id: { in: emptyChatIds } },
+        where: { id: { in: emptyChatIdsToDelete } },
       });
     }
-    res.status(200).json(chats);
 
+    const previewChats = chats
+      .filter(chat => chat.messages.length > 0)
+      .map(chat => ({
+        ...chat,
+        preview: chat.messages[0]?.content.slice(0, 100) +
+          (chat.messages[0]?.content.length > 100 ? "..." : "")
+      }));
+
+    res.status(200).json(previewChats);
   } catch (error) {
-    console.error(error);
+    console.error("Failed to fetch chats:", error);
     res.status(500).json({ error: "Failed to fetch chats" });
   }
 }
