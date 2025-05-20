@@ -57,27 +57,6 @@ export default function ChatListPage() {
     fetchChats();
   };
 
-  if (status === "loading") {
-    return (
-      <Layout>
-        <div className="flex flex-col items-center justify-center h-screen px-4 relative">
-          <BackgroundCollage />
-          <div className="w-full max-w-sm space-y-4 z-10">
-            <h1 className="text-xl font-semibold text-center text-white">
-              Loading Conversations...
-            </h1>
-            {[1, 2, 3, 4, 5].map((_, idx) => (
-              <div
-                key={idx}
-                className="h-12 bg-gray-400/40 animate-pulse rounded shadow-sm"
-              />
-            ))}
-          </div>
-        </div>
-      </Layout>
-    );
-  }
-
   return (
     <Layout>
       <div className="flex flex-col h-screen relative bg-gradient-to-br from-gray-900 to-gray-800 text-white">
@@ -99,48 +78,47 @@ export default function ChatListPage() {
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-6 relative z-10">
+        <div className="flex-1 overflow-y-auto px-6 py-4 relative z-10">
           {isLoadingChats ? (
             <div className="flex flex-col space-y-4 items-center">
-              <h1 className="text-xl font-semibold mb-4 text-gray-300">
+              <h1 className="text-xl font-semibold mb-4 text-gray-800">
                 Loading Conversations...
               </h1>
-              <div className="flex flex-col space-y-3 w-full max-w-xl">
-                {[1, 2, 3, 4, 5].map((_, idx) => (
-                  <div
-                    key={idx}
-                    className="h-12 bg-gray-400/40 animate-pulse rounded shadow-sm"
-                  />
-                ))}
-              </div>
+             <div className="flex flex-col space-y-3 w-full max-w-xl">
+  {[1, 2, 3, 4, 5].map((_, idx) => (
+    <div
+      key={idx}
+      className="h-12 z-index-1 bg-gray-700/70 animate-pulse rounded shadow-md"
+    />
+  ))}
+</div>
+
             </div>
           ) : chats.length === 0 ? (
             <div className="text-center text-gray-400 mt-10">
               No conversations yet. Start a new one!
             </div>
           ) : (
-            <ul className="space-y-4 max-w-4xl mx-auto">
+            <ul className="divide-y divide-gray-700 max-w-4xl mx-auto">
               {chats.map((chat) => (
                 <li
                   key={chat.id}
-                  className="relative flex items-center justify-between bg-[#1f2937] rounded-xl shadow-md p-4 transition duration-200 hover:scale-[1.02] hover:bg-[#374151] hover:border-gray-600 border border-transparent"
+                  className="group relative flex items-center justify-between px-4 py-3 bg-gray-800 hover:bg-gray-600 transition-all"
                   onMouseEnter={() => setHoveredChatId(chat.id)}
                   onMouseLeave={() => setHoveredChatId(null)}
                 >
                   {editingId === chat.id ? (
-                    <>
+                    <div className="flex-1 flex items-center gap-3">
                       <input
                         value={editTitle}
                         onChange={(e) => setEditTitle(e.target.value)}
-                        className="flex-1 border px-3 py-2 rounded-lg focus:outline-none bg-gray-700 text-white"
+                        className="w-full border px-3 py-2 rounded-lg focus:outline-none bg-gray-700 text-white"
                       />
                       <button
                         onClick={() => updateChatTitle(chat.id)}
                         disabled={loadingActionId === chat.id}
-                        className={`text-green-400 hover:text-green-600 ml-3 ${
-                          loadingActionId === chat.id
-                            ? "opacity-50 cursor-not-allowed"
-                            : "cursor-pointer"
+                        className={`text-green-400 hover:text-green-600 ${
+                          loadingActionId === chat.id ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
                         }`}
                       >
                         {loadingActionId === chat.id ? (
@@ -149,25 +127,24 @@ export default function ChatListPage() {
                           <FaSave />
                         )}
                       </button>
-                    </>
+                    </div>
                   ) : (
                      <Link
                         href={`/chat/${chat.id}`}
-                        className="hover:underline text-lg font-medium text-gray-100"
+                        className="hover:underline text-base font-medium text-white"
                       >
-                    <div className="flex items-center gap-2 relative">
-                     
+                    <div className="flex flex-col w-full relative">
                         {chat.title}
-                   
                       {hoveredChatId === chat.id && chat.preview && (
-                        <div className="absolute mb-5 z-15 top-0 left-full ml-5 bg-gray-100 text-gray-900 text-sm rounded-md p-4 shadow-lg w-[20vw] whitespace-normal">
+                        <div className="mt-2 text-sm text-gray-800 bg-gray-100 p-2 rounded shadow-lg w-full">
                           {chat.preview}
                         </div>
                       )}
                     </div>
-                       </Link>
+                    </Link>
                   )}
-                  <div className="flex items-center gap-3 ml-4">
+
+                  <div className="flex gap-3 ml-4">
                     {editingId !== chat.id && (
                       <button
                         onClick={() => {
@@ -184,9 +161,7 @@ export default function ChatListPage() {
                       onClick={() => deleteChat(chat.id)}
                       disabled={loadingActionId === chat.id}
                       className={`text-red-500 hover:text-red-700 ${
-                        loadingActionId === chat.id
-                          ? "opacity-50 cursor-not-allowed"
-                          : "cursor-pointer"
+                        loadingActionId === chat.id ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
                       }`}
                     >
                       {loadingActionId === chat.id ? (
@@ -202,7 +177,7 @@ export default function ChatListPage() {
           )}
         </div>
       </div>
-    </Layout>
+      </Layout>
   );
 }
 
@@ -231,4 +206,3 @@ function BackgroundCollage() {
     </div>
   );
 }
-
