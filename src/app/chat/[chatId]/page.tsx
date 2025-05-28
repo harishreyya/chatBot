@@ -55,7 +55,7 @@ export default function ChatPage() {
     setIsCreatingChat(true);
     const res = await fetch("/api/chat/newChat", { method: "POST" });
     const newChat = await res.json();
-    await fetchChats(); // refetch to ensure messages and preview available
+    await fetchChats(); 
     router.push(`/chat/${newChat.id}`);
     setIsCreatingChat(false);
   };
