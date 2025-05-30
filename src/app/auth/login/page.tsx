@@ -87,10 +87,10 @@ export default function LoginPage() {
       <div className="relative w-full max-w-md p-4">
         <Card className="bg-white bg-opacity-90 rounded-2xl shadow-xl border border-gray-200">
           <h1 className="text-2xl font-bold text-center mb-2 text-gray-800">
-            AI Models
+            Ask Any ✍️🧠
           </h1>
           <p className="text-center text-gray-700 text-sm mb-4 p-3 bg-gray-100 rounded-md border border-gray-200">
-            Sign in with your email to access exclusive AI models. 
+            Sign in with your email to access exclusive Ask Any. 
             A one-time passcode (OTP) will be sent to your inbox for secure verification. 
             Please check your email after submission.
           </p>
