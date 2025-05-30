@@ -101,7 +101,7 @@ export default function ChatPage() {
 
   return (
     <Layout>
-      <div className="flex h-screen text-white bg-gradient-to-br from-gray-900 to-gray-800">
+      <div className="flex h-[calc(100vh-60px)] text-white">
         <aside className="w-72 bg-gray-900 border-r border-gray-700 overflow-y-auto">
           <div className="flex items-center justify-between p-4 border-b border-gray-700">
             <h2 className="text-lg font-semibold">Chats</h2>
@@ -217,7 +217,7 @@ export default function ChatPage() {
                 if (e.key === "Enter" && !isSending) sendMessage();
               }}
               disabled={isSending}
-              className="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
+              className="flex-1 border border-gray-300 text-gray-800 rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
               placeholder="Type your message..."
             />
             <button

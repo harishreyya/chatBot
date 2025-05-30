@@ -62,7 +62,7 @@ export default function ChatListPage() {
       <div className="flex flex-col h-screen relative bg-gradient-to-br from-gray-900 to-gray-800 text-white">
         <BackgroundCollage />
 
-        <div className="flex items-center justify-between p-4 border-b bg-gray-900 shadow-sm relative z-10">
+        <div className="flex items-center justify-between p-4 border-b bg-gray-900 shadow-sm relative">
           <h1 className="text-2xl font-bold text-white">Your Conversations</h1>
           <button
             onClick={startNewChat}
@@ -95,7 +95,7 @@ export default function ChatListPage() {
 
             </div>
           ) : chats.length === 0 ? (
-            <div className="text-center text-gray-400 mt-10">
+            <div className="text-center text-gray-900 mt-10">
               No conversations yet. Start a new one!
             </div>
           ) : (
