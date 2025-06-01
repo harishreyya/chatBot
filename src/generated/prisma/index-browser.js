@@ -139,6 +139,14 @@ exports.Prisma.MessageScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.GeneratedImageScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  prompt: 'prompt',
+  imageUrl: 'imageUrl',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -154,7 +162,8 @@ exports.Prisma.ModelName = {
   VerificationToken: 'VerificationToken',
   User: 'User',
   Chat: 'Chat',
-  Message: 'Message'
+  Message: 'Message',
+  GeneratedImage: 'GeneratedImage'
 };
 
 /**

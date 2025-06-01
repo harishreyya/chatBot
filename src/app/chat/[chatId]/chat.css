@@ -6,9 +6,22 @@
   overflow-y: auto;
 }
 
+.bottom-display{
+  display: none;
+}
+
 
 @media (max-width: 767px) {
   .chat-sidebar {
     display: none;
   }
+
+  .aside-responsive {
+    display: none !important;
+  }
+
+  .bottom-display{
+  display: block;
 }
+}
+

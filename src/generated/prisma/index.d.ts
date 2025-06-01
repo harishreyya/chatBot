@@ -33,6 +33,11 @@ export type Chat = $Result.DefaultSelection<Prisma.$ChatPayload>
  * 
  */
 export type Message = $Result.DefaultSelection<Prisma.$MessagePayload>
+/**
+ * Model GeneratedImage
+ * 
+ */
+export type GeneratedImage = $Result.DefaultSelection<Prisma.$GeneratedImagePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -165,6 +170,16 @@ export class PrismaClient<
     * ```
     */
   get message(): Prisma.MessageDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.generatedImage`: Exposes CRUD operations for the **GeneratedImage** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more GeneratedImages
+    * const generatedImages = await prisma.generatedImage.findMany()
+    * ```
+    */
+  get generatedImage(): Prisma.GeneratedImageDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -608,7 +623,8 @@ export namespace Prisma {
     VerificationToken: 'VerificationToken',
     User: 'User',
     Chat: 'Chat',
-    Message: 'Message'
+    Message: 'Message',
+    GeneratedImage: 'GeneratedImage'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -627,7 +643,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "verificationToken" | "user" | "chat" | "message"
+      modelProps: "verificationToken" | "user" | "chat" | "message" | "generatedImage"
       txIsolationLevel: never
     }
     model: {
@@ -927,6 +943,80 @@ export namespace Prisma {
           }
         }
       }
+      GeneratedImage: {
+        payload: Prisma.$GeneratedImagePayload<ExtArgs>
+        fields: Prisma.GeneratedImageFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GeneratedImageFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GeneratedImagePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GeneratedImageFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GeneratedImagePayload>
+          }
+          findFirst: {
+            args: Prisma.GeneratedImageFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GeneratedImagePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GeneratedImageFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GeneratedImagePayload>
+          }
+          findMany: {
+            args: Prisma.GeneratedImageFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GeneratedImagePayload>[]
+          }
+          create: {
+            args: Prisma.GeneratedImageCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GeneratedImagePayload>
+          }
+          createMany: {
+            args: Prisma.GeneratedImageCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.GeneratedImageDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GeneratedImagePayload>
+          }
+          update: {
+            args: Prisma.GeneratedImageUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GeneratedImagePayload>
+          }
+          deleteMany: {
+            args: Prisma.GeneratedImageDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GeneratedImageUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.GeneratedImageUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GeneratedImagePayload>
+          }
+          aggregate: {
+            args: Prisma.GeneratedImageAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGeneratedImage>
+          }
+          groupBy: {
+            args: Prisma.GeneratedImageGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GeneratedImageGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.GeneratedImageFindRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.GeneratedImageAggregateRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          count: {
+            args: Prisma.GeneratedImageCountArgs<ExtArgs>
+            result: $Utils.Optional<GeneratedImageCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1002,6 +1092,7 @@ export namespace Prisma {
     user?: UserOmit
     chat?: ChatOmit
     message?: MessageOmit
+    generatedImage?: GeneratedImageOmit
   }
 
   /* Types for Logging */
@@ -1097,10 +1188,12 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     chats: number
+    generatedImages: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     chats?: boolean | UserCountOutputTypeCountChatsArgs
+    generatedImages?: boolean | UserCountOutputTypeCountGeneratedImagesArgs
   }
 
   // Custom InputTypes
@@ -1119,6 +1212,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountChatsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ChatWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountGeneratedImagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GeneratedImageWhereInput
   }
 
 
@@ -2235,6 +2335,7 @@ export namespace Prisma {
     emailVerified?: boolean
     createdAt?: boolean
     chats?: boolean | User$chatsArgs<ExtArgs>
+    generatedImages?: boolean | User$generatedImagesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2250,6 +2351,7 @@ export namespace Prisma {
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "emailVerified" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     chats?: boolean | User$chatsArgs<ExtArgs>
+    generatedImages?: boolean | User$generatedImagesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -2257,6 +2359,7 @@ export namespace Prisma {
     name: "User"
     objects: {
       chats: Prisma.$ChatPayload<ExtArgs>[]
+      generatedImages: Prisma.$GeneratedImagePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2627,6 +2730,7 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     chats<T extends User$chatsArgs<ExtArgs> = {}>(args?: Subset<T, User$chatsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    generatedImages<T extends User$generatedImagesArgs<ExtArgs> = {}>(args?: Subset<T, User$generatedImagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GeneratedImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3051,6 +3155,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ChatScalarFieldEnum | ChatScalarFieldEnum[]
+  }
+
+  /**
+   * User.generatedImages
+   */
+  export type User$generatedImagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeneratedImage
+     */
+    select?: GeneratedImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GeneratedImage
+     */
+    omit?: GeneratedImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GeneratedImageInclude<ExtArgs> | null
+    where?: GeneratedImageWhereInput
+    orderBy?: GeneratedImageOrderByWithRelationInput | GeneratedImageOrderByWithRelationInput[]
+    cursor?: GeneratedImageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GeneratedImageScalarFieldEnum | GeneratedImageScalarFieldEnum[]
   }
 
   /**
@@ -5050,6 +5178,985 @@ export namespace Prisma {
 
 
   /**
+   * Model GeneratedImage
+   */
+
+  export type AggregateGeneratedImage = {
+    _count: GeneratedImageCountAggregateOutputType | null
+    _min: GeneratedImageMinAggregateOutputType | null
+    _max: GeneratedImageMaxAggregateOutputType | null
+  }
+
+  export type GeneratedImageMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    prompt: string | null
+    imageUrl: string | null
+    createdAt: Date | null
+  }
+
+  export type GeneratedImageMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    prompt: string | null
+    imageUrl: string | null
+    createdAt: Date | null
+  }
+
+  export type GeneratedImageCountAggregateOutputType = {
+    id: number
+    userId: number
+    prompt: number
+    imageUrl: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type GeneratedImageMinAggregateInputType = {
+    id?: true
+    userId?: true
+    prompt?: true
+    imageUrl?: true
+    createdAt?: true
+  }
+
+  export type GeneratedImageMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    prompt?: true
+    imageUrl?: true
+    createdAt?: true
+  }
+
+  export type GeneratedImageCountAggregateInputType = {
+    id?: true
+    userId?: true
+    prompt?: true
+    imageUrl?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type GeneratedImageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GeneratedImage to aggregate.
+     */
+    where?: GeneratedImageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GeneratedImages to fetch.
+     */
+    orderBy?: GeneratedImageOrderByWithRelationInput | GeneratedImageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GeneratedImageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GeneratedImages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GeneratedImages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned GeneratedImages
+    **/
+    _count?: true | GeneratedImageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GeneratedImageMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GeneratedImageMaxAggregateInputType
+  }
+
+  export type GetGeneratedImageAggregateType<T extends GeneratedImageAggregateArgs> = {
+        [P in keyof T & keyof AggregateGeneratedImage]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGeneratedImage[P]>
+      : GetScalarType<T[P], AggregateGeneratedImage[P]>
+  }
+
+
+
+
+  export type GeneratedImageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GeneratedImageWhereInput
+    orderBy?: GeneratedImageOrderByWithAggregationInput | GeneratedImageOrderByWithAggregationInput[]
+    by: GeneratedImageScalarFieldEnum[] | GeneratedImageScalarFieldEnum
+    having?: GeneratedImageScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GeneratedImageCountAggregateInputType | true
+    _min?: GeneratedImageMinAggregateInputType
+    _max?: GeneratedImageMaxAggregateInputType
+  }
+
+  export type GeneratedImageGroupByOutputType = {
+    id: string
+    userId: string
+    prompt: string
+    imageUrl: string
+    createdAt: Date
+    _count: GeneratedImageCountAggregateOutputType | null
+    _min: GeneratedImageMinAggregateOutputType | null
+    _max: GeneratedImageMaxAggregateOutputType | null
+  }
+
+  type GetGeneratedImageGroupByPayload<T extends GeneratedImageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GeneratedImageGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GeneratedImageGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GeneratedImageGroupByOutputType[P]>
+            : GetScalarType<T[P], GeneratedImageGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GeneratedImageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    prompt?: boolean
+    imageUrl?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["generatedImage"]>
+
+
+
+  export type GeneratedImageSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    prompt?: boolean
+    imageUrl?: boolean
+    createdAt?: boolean
+  }
+
+  export type GeneratedImageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "prompt" | "imageUrl" | "createdAt", ExtArgs["result"]["generatedImage"]>
+  export type GeneratedImageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $GeneratedImagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "GeneratedImage"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      prompt: string
+      imageUrl: string
+      createdAt: Date
+    }, ExtArgs["result"]["generatedImage"]>
+    composites: {}
+  }
+
+  type GeneratedImageGetPayload<S extends boolean | null | undefined | GeneratedImageDefaultArgs> = $Result.GetResult<Prisma.$GeneratedImagePayload, S>
+
+  type GeneratedImageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GeneratedImageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GeneratedImageCountAggregateInputType | true
+    }
+
+  export interface GeneratedImageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GeneratedImage'], meta: { name: 'GeneratedImage' } }
+    /**
+     * Find zero or one GeneratedImage that matches the filter.
+     * @param {GeneratedImageFindUniqueArgs} args - Arguments to find a GeneratedImage
+     * @example
+     * // Get one GeneratedImage
+     * const generatedImage = await prisma.generatedImage.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GeneratedImageFindUniqueArgs>(args: SelectSubset<T, GeneratedImageFindUniqueArgs<ExtArgs>>): Prisma__GeneratedImageClient<$Result.GetResult<Prisma.$GeneratedImagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one GeneratedImage that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GeneratedImageFindUniqueOrThrowArgs} args - Arguments to find a GeneratedImage
+     * @example
+     * // Get one GeneratedImage
+     * const generatedImage = await prisma.generatedImage.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GeneratedImageFindUniqueOrThrowArgs>(args: SelectSubset<T, GeneratedImageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GeneratedImageClient<$Result.GetResult<Prisma.$GeneratedImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GeneratedImage that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GeneratedImageFindFirstArgs} args - Arguments to find a GeneratedImage
+     * @example
+     * // Get one GeneratedImage
+     * const generatedImage = await prisma.generatedImage.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GeneratedImageFindFirstArgs>(args?: SelectSubset<T, GeneratedImageFindFirstArgs<ExtArgs>>): Prisma__GeneratedImageClient<$Result.GetResult<Prisma.$GeneratedImagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GeneratedImage that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GeneratedImageFindFirstOrThrowArgs} args - Arguments to find a GeneratedImage
+     * @example
+     * // Get one GeneratedImage
+     * const generatedImage = await prisma.generatedImage.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GeneratedImageFindFirstOrThrowArgs>(args?: SelectSubset<T, GeneratedImageFindFirstOrThrowArgs<ExtArgs>>): Prisma__GeneratedImageClient<$Result.GetResult<Prisma.$GeneratedImagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more GeneratedImages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GeneratedImageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all GeneratedImages
+     * const generatedImages = await prisma.generatedImage.findMany()
+     * 
+     * // Get first 10 GeneratedImages
+     * const generatedImages = await prisma.generatedImage.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const generatedImageWithIdOnly = await prisma.generatedImage.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends GeneratedImageFindManyArgs>(args?: SelectSubset<T, GeneratedImageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GeneratedImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a GeneratedImage.
+     * @param {GeneratedImageCreateArgs} args - Arguments to create a GeneratedImage.
+     * @example
+     * // Create one GeneratedImage
+     * const GeneratedImage = await prisma.generatedImage.create({
+     *   data: {
+     *     // ... data to create a GeneratedImage
+     *   }
+     * })
+     * 
+     */
+    create<T extends GeneratedImageCreateArgs>(args: SelectSubset<T, GeneratedImageCreateArgs<ExtArgs>>): Prisma__GeneratedImageClient<$Result.GetResult<Prisma.$GeneratedImagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many GeneratedImages.
+     * @param {GeneratedImageCreateManyArgs} args - Arguments to create many GeneratedImages.
+     * @example
+     * // Create many GeneratedImages
+     * const generatedImage = await prisma.generatedImage.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends GeneratedImageCreateManyArgs>(args?: SelectSubset<T, GeneratedImageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a GeneratedImage.
+     * @param {GeneratedImageDeleteArgs} args - Arguments to delete one GeneratedImage.
+     * @example
+     * // Delete one GeneratedImage
+     * const GeneratedImage = await prisma.generatedImage.delete({
+     *   where: {
+     *     // ... filter to delete one GeneratedImage
+     *   }
+     * })
+     * 
+     */
+    delete<T extends GeneratedImageDeleteArgs>(args: SelectSubset<T, GeneratedImageDeleteArgs<ExtArgs>>): Prisma__GeneratedImageClient<$Result.GetResult<Prisma.$GeneratedImagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one GeneratedImage.
+     * @param {GeneratedImageUpdateArgs} args - Arguments to update one GeneratedImage.
+     * @example
+     * // Update one GeneratedImage
+     * const generatedImage = await prisma.generatedImage.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends GeneratedImageUpdateArgs>(args: SelectSubset<T, GeneratedImageUpdateArgs<ExtArgs>>): Prisma__GeneratedImageClient<$Result.GetResult<Prisma.$GeneratedImagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more GeneratedImages.
+     * @param {GeneratedImageDeleteManyArgs} args - Arguments to filter GeneratedImages to delete.
+     * @example
+     * // Delete a few GeneratedImages
+     * const { count } = await prisma.generatedImage.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends GeneratedImageDeleteManyArgs>(args?: SelectSubset<T, GeneratedImageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GeneratedImages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GeneratedImageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many GeneratedImages
+     * const generatedImage = await prisma.generatedImage.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends GeneratedImageUpdateManyArgs>(args: SelectSubset<T, GeneratedImageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one GeneratedImage.
+     * @param {GeneratedImageUpsertArgs} args - Arguments to update or create a GeneratedImage.
+     * @example
+     * // Update or create a GeneratedImage
+     * const generatedImage = await prisma.generatedImage.upsert({
+     *   create: {
+     *     // ... data to create a GeneratedImage
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the GeneratedImage we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GeneratedImageUpsertArgs>(args: SelectSubset<T, GeneratedImageUpsertArgs<ExtArgs>>): Prisma__GeneratedImageClient<$Result.GetResult<Prisma.$GeneratedImagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more GeneratedImages that matches the filter.
+     * @param {GeneratedImageFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const generatedImage = await prisma.generatedImage.findRaw({
+     *   filter: { age: { $gt: 25 } }
+     * })
+     */
+    findRaw(args?: GeneratedImageFindRawArgs): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a GeneratedImage.
+     * @param {GeneratedImageAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const generatedImage = await prisma.generatedImage.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+     */
+    aggregateRaw(args?: GeneratedImageAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
+
+
+    /**
+     * Count the number of GeneratedImages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GeneratedImageCountArgs} args - Arguments to filter GeneratedImages to count.
+     * @example
+     * // Count the number of GeneratedImages
+     * const count = await prisma.generatedImage.count({
+     *   where: {
+     *     // ... the filter for the GeneratedImages we want to count
+     *   }
+     * })
+    **/
+    count<T extends GeneratedImageCountArgs>(
+      args?: Subset<T, GeneratedImageCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GeneratedImageCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a GeneratedImage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GeneratedImageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GeneratedImageAggregateArgs>(args: Subset<T, GeneratedImageAggregateArgs>): Prisma.PrismaPromise<GetGeneratedImageAggregateType<T>>
+
+    /**
+     * Group by GeneratedImage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GeneratedImageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GeneratedImageGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GeneratedImageGroupByArgs['orderBy'] }
+        : { orderBy?: GeneratedImageGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GeneratedImageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGeneratedImageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the GeneratedImage model
+   */
+  readonly fields: GeneratedImageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for GeneratedImage.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GeneratedImageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the GeneratedImage model
+   */
+  interface GeneratedImageFieldRefs {
+    readonly id: FieldRef<"GeneratedImage", 'String'>
+    readonly userId: FieldRef<"GeneratedImage", 'String'>
+    readonly prompt: FieldRef<"GeneratedImage", 'String'>
+    readonly imageUrl: FieldRef<"GeneratedImage", 'String'>
+    readonly createdAt: FieldRef<"GeneratedImage", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * GeneratedImage findUnique
+   */
+  export type GeneratedImageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeneratedImage
+     */
+    select?: GeneratedImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GeneratedImage
+     */
+    omit?: GeneratedImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GeneratedImageInclude<ExtArgs> | null
+    /**
+     * Filter, which GeneratedImage to fetch.
+     */
+    where: GeneratedImageWhereUniqueInput
+  }
+
+  /**
+   * GeneratedImage findUniqueOrThrow
+   */
+  export type GeneratedImageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeneratedImage
+     */
+    select?: GeneratedImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GeneratedImage
+     */
+    omit?: GeneratedImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GeneratedImageInclude<ExtArgs> | null
+    /**
+     * Filter, which GeneratedImage to fetch.
+     */
+    where: GeneratedImageWhereUniqueInput
+  }
+
+  /**
+   * GeneratedImage findFirst
+   */
+  export type GeneratedImageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeneratedImage
+     */
+    select?: GeneratedImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GeneratedImage
+     */
+    omit?: GeneratedImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GeneratedImageInclude<ExtArgs> | null
+    /**
+     * Filter, which GeneratedImage to fetch.
+     */
+    where?: GeneratedImageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GeneratedImages to fetch.
+     */
+    orderBy?: GeneratedImageOrderByWithRelationInput | GeneratedImageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GeneratedImages.
+     */
+    cursor?: GeneratedImageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GeneratedImages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GeneratedImages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GeneratedImages.
+     */
+    distinct?: GeneratedImageScalarFieldEnum | GeneratedImageScalarFieldEnum[]
+  }
+
+  /**
+   * GeneratedImage findFirstOrThrow
+   */
+  export type GeneratedImageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeneratedImage
+     */
+    select?: GeneratedImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GeneratedImage
+     */
+    omit?: GeneratedImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GeneratedImageInclude<ExtArgs> | null
+    /**
+     * Filter, which GeneratedImage to fetch.
+     */
+    where?: GeneratedImageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GeneratedImages to fetch.
+     */
+    orderBy?: GeneratedImageOrderByWithRelationInput | GeneratedImageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GeneratedImages.
+     */
+    cursor?: GeneratedImageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GeneratedImages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GeneratedImages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GeneratedImages.
+     */
+    distinct?: GeneratedImageScalarFieldEnum | GeneratedImageScalarFieldEnum[]
+  }
+
+  /**
+   * GeneratedImage findMany
+   */
+  export type GeneratedImageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeneratedImage
+     */
+    select?: GeneratedImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GeneratedImage
+     */
+    omit?: GeneratedImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GeneratedImageInclude<ExtArgs> | null
+    /**
+     * Filter, which GeneratedImages to fetch.
+     */
+    where?: GeneratedImageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GeneratedImages to fetch.
+     */
+    orderBy?: GeneratedImageOrderByWithRelationInput | GeneratedImageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing GeneratedImages.
+     */
+    cursor?: GeneratedImageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GeneratedImages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GeneratedImages.
+     */
+    skip?: number
+    distinct?: GeneratedImageScalarFieldEnum | GeneratedImageScalarFieldEnum[]
+  }
+
+  /**
+   * GeneratedImage create
+   */
+  export type GeneratedImageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeneratedImage
+     */
+    select?: GeneratedImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GeneratedImage
+     */
+    omit?: GeneratedImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GeneratedImageInclude<ExtArgs> | null
+    /**
+     * The data needed to create a GeneratedImage.
+     */
+    data: XOR<GeneratedImageCreateInput, GeneratedImageUncheckedCreateInput>
+  }
+
+  /**
+   * GeneratedImage createMany
+   */
+  export type GeneratedImageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many GeneratedImages.
+     */
+    data: GeneratedImageCreateManyInput | GeneratedImageCreateManyInput[]
+  }
+
+  /**
+   * GeneratedImage update
+   */
+  export type GeneratedImageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeneratedImage
+     */
+    select?: GeneratedImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GeneratedImage
+     */
+    omit?: GeneratedImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GeneratedImageInclude<ExtArgs> | null
+    /**
+     * The data needed to update a GeneratedImage.
+     */
+    data: XOR<GeneratedImageUpdateInput, GeneratedImageUncheckedUpdateInput>
+    /**
+     * Choose, which GeneratedImage to update.
+     */
+    where: GeneratedImageWhereUniqueInput
+  }
+
+  /**
+   * GeneratedImage updateMany
+   */
+  export type GeneratedImageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update GeneratedImages.
+     */
+    data: XOR<GeneratedImageUpdateManyMutationInput, GeneratedImageUncheckedUpdateManyInput>
+    /**
+     * Filter which GeneratedImages to update
+     */
+    where?: GeneratedImageWhereInput
+    /**
+     * Limit how many GeneratedImages to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GeneratedImage upsert
+   */
+  export type GeneratedImageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeneratedImage
+     */
+    select?: GeneratedImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GeneratedImage
+     */
+    omit?: GeneratedImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GeneratedImageInclude<ExtArgs> | null
+    /**
+     * The filter to search for the GeneratedImage to update in case it exists.
+     */
+    where: GeneratedImageWhereUniqueInput
+    /**
+     * In case the GeneratedImage found by the `where` argument doesn't exist, create a new GeneratedImage with this data.
+     */
+    create: XOR<GeneratedImageCreateInput, GeneratedImageUncheckedCreateInput>
+    /**
+     * In case the GeneratedImage was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GeneratedImageUpdateInput, GeneratedImageUncheckedUpdateInput>
+  }
+
+  /**
+   * GeneratedImage delete
+   */
+  export type GeneratedImageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeneratedImage
+     */
+    select?: GeneratedImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GeneratedImage
+     */
+    omit?: GeneratedImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GeneratedImageInclude<ExtArgs> | null
+    /**
+     * Filter which GeneratedImage to delete.
+     */
+    where: GeneratedImageWhereUniqueInput
+  }
+
+  /**
+   * GeneratedImage deleteMany
+   */
+  export type GeneratedImageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GeneratedImages to delete
+     */
+    where?: GeneratedImageWhereInput
+    /**
+     * Limit how many GeneratedImages to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * GeneratedImage findRaw
+   */
+  export type GeneratedImageFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * GeneratedImage aggregateRaw
+   */
+  export type GeneratedImageAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * GeneratedImage without action
+   */
+  export type GeneratedImageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GeneratedImage
+     */
+    select?: GeneratedImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GeneratedImage
+     */
+    omit?: GeneratedImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GeneratedImageInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -5092,6 +6199,17 @@ export namespace Prisma {
   };
 
   export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
+
+
+  export const GeneratedImageScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    prompt: 'prompt',
+    imageUrl: 'imageUrl',
+    createdAt: 'createdAt'
+  };
+
+  export type GeneratedImageScalarFieldEnum = (typeof GeneratedImageScalarFieldEnum)[keyof typeof GeneratedImageScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -5217,6 +6335,7 @@ export namespace Prisma {
     emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     chats?: ChatListRelationFilter
+    generatedImages?: GeneratedImageListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -5225,6 +6344,7 @@ export namespace Prisma {
     emailVerified?: SortOrder
     createdAt?: SortOrder
     chats?: ChatOrderByRelationAggregateInput
+    generatedImages?: GeneratedImageOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -5236,6 +6356,7 @@ export namespace Prisma {
     emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     chats?: ChatListRelationFilter
+    generatedImages?: GeneratedImageListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -5366,6 +6487,61 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Message"> | Date | string
   }
 
+  export type GeneratedImageWhereInput = {
+    AND?: GeneratedImageWhereInput | GeneratedImageWhereInput[]
+    OR?: GeneratedImageWhereInput[]
+    NOT?: GeneratedImageWhereInput | GeneratedImageWhereInput[]
+    id?: StringFilter<"GeneratedImage"> | string
+    userId?: StringFilter<"GeneratedImage"> | string
+    prompt?: StringFilter<"GeneratedImage"> | string
+    imageUrl?: StringFilter<"GeneratedImage"> | string
+    createdAt?: DateTimeFilter<"GeneratedImage"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type GeneratedImageOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    prompt?: SortOrder
+    imageUrl?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type GeneratedImageWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: GeneratedImageWhereInput | GeneratedImageWhereInput[]
+    OR?: GeneratedImageWhereInput[]
+    NOT?: GeneratedImageWhereInput | GeneratedImageWhereInput[]
+    userId?: StringFilter<"GeneratedImage"> | string
+    prompt?: StringFilter<"GeneratedImage"> | string
+    imageUrl?: StringFilter<"GeneratedImage"> | string
+    createdAt?: DateTimeFilter<"GeneratedImage"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type GeneratedImageOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    prompt?: SortOrder
+    imageUrl?: SortOrder
+    createdAt?: SortOrder
+    _count?: GeneratedImageCountOrderByAggregateInput
+    _max?: GeneratedImageMaxOrderByAggregateInput
+    _min?: GeneratedImageMinOrderByAggregateInput
+  }
+
+  export type GeneratedImageScalarWhereWithAggregatesInput = {
+    AND?: GeneratedImageScalarWhereWithAggregatesInput | GeneratedImageScalarWhereWithAggregatesInput[]
+    OR?: GeneratedImageScalarWhereWithAggregatesInput[]
+    NOT?: GeneratedImageScalarWhereWithAggregatesInput | GeneratedImageScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"GeneratedImage"> | string
+    userId?: StringWithAggregatesFilter<"GeneratedImage"> | string
+    prompt?: StringWithAggregatesFilter<"GeneratedImage"> | string
+    imageUrl?: StringWithAggregatesFilter<"GeneratedImage"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"GeneratedImage"> | Date | string
+  }
+
   export type VerificationTokenCreateInput = {
     id?: string
     identifier: string
@@ -5417,6 +6593,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     createdAt?: Date | string
     chats?: ChatCreateNestedManyWithoutUserInput
+    generatedImages?: GeneratedImageCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -5425,6 +6602,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     createdAt?: Date | string
     chats?: ChatUncheckedCreateNestedManyWithoutUserInput
+    generatedImages?: GeneratedImageUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -5432,6 +6610,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     chats?: ChatUpdateManyWithoutUserNestedInput
+    generatedImages?: GeneratedImageUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -5439,6 +6618,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     chats?: ChatUncheckedUpdateManyWithoutUserNestedInput
+    generatedImages?: GeneratedImageUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -5559,6 +6739,57 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type GeneratedImageCreateInput = {
+    id?: string
+    prompt: string
+    imageUrl: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutGeneratedImagesInput
+  }
+
+  export type GeneratedImageUncheckedCreateInput = {
+    id?: string
+    userId: string
+    prompt: string
+    imageUrl: string
+    createdAt?: Date | string
+  }
+
+  export type GeneratedImageUpdateInput = {
+    prompt?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutGeneratedImagesNestedInput
+  }
+
+  export type GeneratedImageUncheckedUpdateInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    prompt?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GeneratedImageCreateManyInput = {
+    id?: string
+    userId: string
+    prompt: string
+    imageUrl: string
+    createdAt?: Date | string
+  }
+
+  export type GeneratedImageUpdateManyMutationInput = {
+    prompt?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GeneratedImageUncheckedUpdateManyInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    prompt?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -5661,7 +6892,17 @@ export namespace Prisma {
     none?: ChatWhereInput
   }
 
+  export type GeneratedImageListRelationFilter = {
+    every?: GeneratedImageWhereInput
+    some?: GeneratedImageWhereInput
+    none?: GeneratedImageWhereInput
+  }
+
   export type ChatOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type GeneratedImageOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -5801,6 +7042,30 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
+  export type GeneratedImageCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    prompt?: SortOrder
+    imageUrl?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type GeneratedImageMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    prompt?: SortOrder
+    imageUrl?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type GeneratedImageMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    prompt?: SortOrder
+    imageUrl?: SortOrder
+    createdAt?: SortOrder
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -5816,11 +7081,25 @@ export namespace Prisma {
     connect?: ChatWhereUniqueInput | ChatWhereUniqueInput[]
   }
 
+  export type GeneratedImageCreateNestedManyWithoutUserInput = {
+    create?: XOR<GeneratedImageCreateWithoutUserInput, GeneratedImageUncheckedCreateWithoutUserInput> | GeneratedImageCreateWithoutUserInput[] | GeneratedImageUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: GeneratedImageCreateOrConnectWithoutUserInput | GeneratedImageCreateOrConnectWithoutUserInput[]
+    createMany?: GeneratedImageCreateManyUserInputEnvelope
+    connect?: GeneratedImageWhereUniqueInput | GeneratedImageWhereUniqueInput[]
+  }
+
   export type ChatUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<ChatCreateWithoutUserInput, ChatUncheckedCreateWithoutUserInput> | ChatCreateWithoutUserInput[] | ChatUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ChatCreateOrConnectWithoutUserInput | ChatCreateOrConnectWithoutUserInput[]
     createMany?: ChatCreateManyUserInputEnvelope
     connect?: ChatWhereUniqueInput | ChatWhereUniqueInput[]
+  }
+
+  export type GeneratedImageUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<GeneratedImageCreateWithoutUserInput, GeneratedImageUncheckedCreateWithoutUserInput> | GeneratedImageCreateWithoutUserInput[] | GeneratedImageUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: GeneratedImageCreateOrConnectWithoutUserInput | GeneratedImageCreateOrConnectWithoutUserInput[]
+    createMany?: GeneratedImageCreateManyUserInputEnvelope
+    connect?: GeneratedImageWhereUniqueInput | GeneratedImageWhereUniqueInput[]
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -5842,6 +7121,20 @@ export namespace Prisma {
     deleteMany?: ChatScalarWhereInput | ChatScalarWhereInput[]
   }
 
+  export type GeneratedImageUpdateManyWithoutUserNestedInput = {
+    create?: XOR<GeneratedImageCreateWithoutUserInput, GeneratedImageUncheckedCreateWithoutUserInput> | GeneratedImageCreateWithoutUserInput[] | GeneratedImageUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: GeneratedImageCreateOrConnectWithoutUserInput | GeneratedImageCreateOrConnectWithoutUserInput[]
+    upsert?: GeneratedImageUpsertWithWhereUniqueWithoutUserInput | GeneratedImageUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: GeneratedImageCreateManyUserInputEnvelope
+    set?: GeneratedImageWhereUniqueInput | GeneratedImageWhereUniqueInput[]
+    disconnect?: GeneratedImageWhereUniqueInput | GeneratedImageWhereUniqueInput[]
+    delete?: GeneratedImageWhereUniqueInput | GeneratedImageWhereUniqueInput[]
+    connect?: GeneratedImageWhereUniqueInput | GeneratedImageWhereUniqueInput[]
+    update?: GeneratedImageUpdateWithWhereUniqueWithoutUserInput | GeneratedImageUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: GeneratedImageUpdateManyWithWhereWithoutUserInput | GeneratedImageUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: GeneratedImageScalarWhereInput | GeneratedImageScalarWhereInput[]
+  }
+
   export type ChatUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<ChatCreateWithoutUserInput, ChatUncheckedCreateWithoutUserInput> | ChatCreateWithoutUserInput[] | ChatUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ChatCreateOrConnectWithoutUserInput | ChatCreateOrConnectWithoutUserInput[]
@@ -5854,6 +7147,20 @@ export namespace Prisma {
     update?: ChatUpdateWithWhereUniqueWithoutUserInput | ChatUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ChatUpdateManyWithWhereWithoutUserInput | ChatUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ChatScalarWhereInput | ChatScalarWhereInput[]
+  }
+
+  export type GeneratedImageUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<GeneratedImageCreateWithoutUserInput, GeneratedImageUncheckedCreateWithoutUserInput> | GeneratedImageCreateWithoutUserInput[] | GeneratedImageUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: GeneratedImageCreateOrConnectWithoutUserInput | GeneratedImageCreateOrConnectWithoutUserInput[]
+    upsert?: GeneratedImageUpsertWithWhereUniqueWithoutUserInput | GeneratedImageUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: GeneratedImageCreateManyUserInputEnvelope
+    set?: GeneratedImageWhereUniqueInput | GeneratedImageWhereUniqueInput[]
+    disconnect?: GeneratedImageWhereUniqueInput | GeneratedImageWhereUniqueInput[]
+    delete?: GeneratedImageWhereUniqueInput | GeneratedImageWhereUniqueInput[]
+    connect?: GeneratedImageWhereUniqueInput | GeneratedImageWhereUniqueInput[]
+    update?: GeneratedImageUpdateWithWhereUniqueWithoutUserInput | GeneratedImageUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: GeneratedImageUpdateManyWithWhereWithoutUserInput | GeneratedImageUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: GeneratedImageScalarWhereInput | GeneratedImageScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutChatsInput = {
@@ -5929,6 +7236,20 @@ export namespace Prisma {
     upsert?: ChatUpsertWithoutMessagesInput
     connect?: ChatWhereUniqueInput
     update?: XOR<XOR<ChatUpdateToOneWithWhereWithoutMessagesInput, ChatUpdateWithoutMessagesInput>, ChatUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type UserCreateNestedOneWithoutGeneratedImagesInput = {
+    create?: XOR<UserCreateWithoutGeneratedImagesInput, UserUncheckedCreateWithoutGeneratedImagesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutGeneratedImagesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutGeneratedImagesNestedInput = {
+    create?: XOR<UserCreateWithoutGeneratedImagesInput, UserUncheckedCreateWithoutGeneratedImagesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutGeneratedImagesInput
+    upsert?: UserUpsertWithoutGeneratedImagesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutGeneratedImagesInput, UserUpdateWithoutGeneratedImagesInput>, UserUncheckedUpdateWithoutGeneratedImagesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -6093,6 +7414,29 @@ export namespace Prisma {
     data: ChatCreateManyUserInput | ChatCreateManyUserInput[]
   }
 
+  export type GeneratedImageCreateWithoutUserInput = {
+    id?: string
+    prompt: string
+    imageUrl: string
+    createdAt?: Date | string
+  }
+
+  export type GeneratedImageUncheckedCreateWithoutUserInput = {
+    id?: string
+    prompt: string
+    imageUrl: string
+    createdAt?: Date | string
+  }
+
+  export type GeneratedImageCreateOrConnectWithoutUserInput = {
+    where: GeneratedImageWhereUniqueInput
+    create: XOR<GeneratedImageCreateWithoutUserInput, GeneratedImageUncheckedCreateWithoutUserInput>
+  }
+
+  export type GeneratedImageCreateManyUserInputEnvelope = {
+    data: GeneratedImageCreateManyUserInput | GeneratedImageCreateManyUserInput[]
+  }
+
   export type ChatUpsertWithWhereUniqueWithoutUserInput = {
     where: ChatWhereUniqueInput
     update: XOR<ChatUpdateWithoutUserInput, ChatUncheckedUpdateWithoutUserInput>
@@ -6119,11 +7463,39 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Chat"> | Date | string
   }
 
+  export type GeneratedImageUpsertWithWhereUniqueWithoutUserInput = {
+    where: GeneratedImageWhereUniqueInput
+    update: XOR<GeneratedImageUpdateWithoutUserInput, GeneratedImageUncheckedUpdateWithoutUserInput>
+    create: XOR<GeneratedImageCreateWithoutUserInput, GeneratedImageUncheckedCreateWithoutUserInput>
+  }
+
+  export type GeneratedImageUpdateWithWhereUniqueWithoutUserInput = {
+    where: GeneratedImageWhereUniqueInput
+    data: XOR<GeneratedImageUpdateWithoutUserInput, GeneratedImageUncheckedUpdateWithoutUserInput>
+  }
+
+  export type GeneratedImageUpdateManyWithWhereWithoutUserInput = {
+    where: GeneratedImageScalarWhereInput
+    data: XOR<GeneratedImageUpdateManyMutationInput, GeneratedImageUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type GeneratedImageScalarWhereInput = {
+    AND?: GeneratedImageScalarWhereInput | GeneratedImageScalarWhereInput[]
+    OR?: GeneratedImageScalarWhereInput[]
+    NOT?: GeneratedImageScalarWhereInput | GeneratedImageScalarWhereInput[]
+    id?: StringFilter<"GeneratedImage"> | string
+    userId?: StringFilter<"GeneratedImage"> | string
+    prompt?: StringFilter<"GeneratedImage"> | string
+    imageUrl?: StringFilter<"GeneratedImage"> | string
+    createdAt?: DateTimeFilter<"GeneratedImage"> | Date | string
+  }
+
   export type UserCreateWithoutChatsInput = {
     id?: string
     email: string
     emailVerified?: Date | string | null
     createdAt?: Date | string
+    generatedImages?: GeneratedImageCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutChatsInput = {
@@ -6131,6 +7503,7 @@ export namespace Prisma {
     email: string
     emailVerified?: Date | string | null
     createdAt?: Date | string
+    generatedImages?: GeneratedImageUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutChatsInput = {
@@ -6176,12 +7549,14 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    generatedImages?: GeneratedImageUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChatsInput = {
     email?: StringFieldUpdateOperationsInput | string
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    generatedImages?: GeneratedImageUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MessageUpsertWithWhereUniqueWithoutChatInput = {
@@ -6253,9 +7628,62 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UserCreateWithoutGeneratedImagesInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    createdAt?: Date | string
+    chats?: ChatCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutGeneratedImagesInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    createdAt?: Date | string
+    chats?: ChatUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutGeneratedImagesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutGeneratedImagesInput, UserUncheckedCreateWithoutGeneratedImagesInput>
+  }
+
+  export type UserUpsertWithoutGeneratedImagesInput = {
+    update: XOR<UserUpdateWithoutGeneratedImagesInput, UserUncheckedUpdateWithoutGeneratedImagesInput>
+    create: XOR<UserCreateWithoutGeneratedImagesInput, UserUncheckedCreateWithoutGeneratedImagesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutGeneratedImagesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutGeneratedImagesInput, UserUncheckedUpdateWithoutGeneratedImagesInput>
+  }
+
+  export type UserUpdateWithoutGeneratedImagesInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    chats?: ChatUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutGeneratedImagesInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    chats?: ChatUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type ChatCreateManyUserInput = {
     id?: string
     title?: string | null
+    createdAt?: Date | string
+  }
+
+  export type GeneratedImageCreateManyUserInput = {
+    id?: string
+    prompt: string
+    imageUrl: string
     createdAt?: Date | string
   }
 
@@ -6273,6 +7701,24 @@ export namespace Prisma {
 
   export type ChatUncheckedUpdateManyWithoutUserInput = {
     title?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GeneratedImageUpdateWithoutUserInput = {
+    prompt?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GeneratedImageUncheckedUpdateWithoutUserInput = {
+    prompt?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GeneratedImageUncheckedUpdateManyWithoutUserInput = {
+    prompt?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

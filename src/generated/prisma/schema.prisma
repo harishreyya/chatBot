@@ -18,11 +18,12 @@ model VerificationToken {
 }
 
 model User {
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  email         String    @unique
-  emailVerified DateTime?
-  createdAt     DateTime  @default(now())
-  chats         Chat[]    @relation("UserChats")
+  id              String           @id @default(auto()) @map("_id") @db.ObjectId
+  email           String           @unique
+  emailVerified   DateTime?
+  createdAt       DateTime         @default(now())
+  chats           Chat[]           @relation("UserChats")
+  generatedImages GeneratedImage[] @relation("UserGeneratedImages")
 }
 
 model Chat {
@@ -40,5 +41,14 @@ model Message {
   chat      Chat     @relation(fields: [chatId], references: [id], name: "ChatMessages")
   role      String
   content   String
+  createdAt DateTime @default(now())
+}
+
+model GeneratedImage {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String
+  user      User     @relation("UserGeneratedImages", fields: [userId], references: [id])
+  prompt    String
+  imageUrl  String
   createdAt DateTime @default(now())
 }
