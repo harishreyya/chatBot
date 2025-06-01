@@ -15,6 +15,7 @@ import {
   FaRobot,
 } from "react-icons/fa";
 import ReactMarkdown from "react-markdown";
+import "./chat.css";
 
 export default function ChatPage() {
   const { data: session, status } = useSession();
@@ -102,18 +103,29 @@ export default function ChatPage() {
   return (
     <Layout>
       <div className="flex h-[calc(100vh-60px)] text-white">
-        <aside className="w-72 bg-gray-900 border-r border-gray-700 overflow-y-auto">
+        <aside className="chat-sidebar">
           <div className="flex items-center justify-between p-4 border-b border-gray-700">
             <h2 className="text-lg font-semibold">Chats</h2>
-            <button
-              onClick={startNewChat}
-              disabled={isCreatingChat}
-              className={`px-3 py-1 rounded text-sm transition cursor-pointer ${
-                isCreatingChat ? "bg-gray-600" : "bg-blue-600 hover:bg-blue-700"
-              }`}
-            >
-              <FaPlus className="inline-block mr-1" /> New
-            </button>
+           <button
+  onClick={startNewChat}
+  disabled={isCreatingChat}
+  className={`px-3 py-1 rounded text-sm transition flex items-center gap-1 ${
+    isCreatingChat ? "bg-gray-600" : "bg-blue-600 hover:bg-blue-700"
+  }`}
+>
+  {isCreatingChat ? (
+    <>
+      <FaSpinner className="animate-spin text-xs" />
+      <span>Creating...</span>
+    </>
+  ) : (
+    <>
+      <FaPlus className="text-xs" />
+      <span>New</span>
+    </>
+  )}
+</button>
+
           </div>
           <ul className="divide-y divide-gray-800">
             {chats.map((chat) => (

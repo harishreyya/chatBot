@@ -1,0 +1,14 @@
+
+.chat-sidebar {
+  width: 22rem;
+  background-color: #1f2937;
+  border-right: 1px solid #374151; 
+  overflow-y: auto;
+}
+
+
+@media (max-width: 767px) {
+  .chat-sidebar {
+    display: none;
+  }
+}
