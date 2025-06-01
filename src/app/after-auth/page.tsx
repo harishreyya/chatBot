@@ -10,7 +10,7 @@ export default async function AfterAuthPage() {
   }
 
 
-  await fetch(`http://localhost:3000/api/users`, {
+  await fetch(`https://chat-bot-rho-sooty.vercel.app/api/users`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     // @ts-ignore
