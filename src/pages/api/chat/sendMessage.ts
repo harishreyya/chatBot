@@ -2,37 +2,36 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/[...nextauth]';
+import OpenAI from 'openai';
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+});
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).end();
 
   const session = await getServerSession(req, res, authOptions as any);
-//   @ts-ignore
+// @ts-ignore
   if (!session || !session?.user?.id) {
-    return res.status(401).json({ error: "Unauthorized" });
+    return res.status(401).json({ error: 'Unauthorized' });
   }
+
   const { chatId, message } = req.body;
 
   if (!chatId || !message) {
-    return res.status(400).json({ error: "Missing parameters" });
+    return res.status(400).json({ error: 'Missing parameters' });
   }
 
   try {
-    const apiResponse = await fetch('https://prod.api.market/api/v1/swift-api/gpt-3-5-turbo/chat/completions', {
-      method: 'POST',
-      headers: {
-        'accept': 'application/json',
-        'x-magicapi-key': process.env.MAGIC_API_KEY as string,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
-        messages: [{ role: 'user', content: message }]
-      })
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-3.5-turbo',
+      messages: [
+        { role: 'user', content: message }
+      ]
     });
 
-    const data = await apiResponse.json();
-    const assistantReply = data.choices?.[0]?.message?.content || 'No response';
+    const assistantReply = completion.choices[0]?.message?.content?.trim() || "I'm not sure how to respond.";
 
     await prisma.message.createMany({
       data: [
@@ -40,11 +39,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         { chatId, role: 'assistant', content: assistantReply }
       ]
     });
-    
-    res.status(200).json({ assistantReply: data.choices?.[0]?.message?.content || 'No response' });
 
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Something went wrong' });
+    console.log('OpenAI API response:', assistantReply);
+
+    res.status(200).json({ assistantReply });
+  } catch (error: any) {
+    console.error('Error in /api/chat/sendMessage:', error);
+    res.status(500).json({ error: 'Failed to get response from assistant' });
   }
 }

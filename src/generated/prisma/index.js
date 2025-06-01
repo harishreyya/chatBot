@@ -168,12 +168,11 @@ const config = {
     "db"
   ],
   "activeProvider": "mongodb",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": null
+        "value": "mongodb+srv://hari:hari@cluster0.hsmpfuf.mongodb.net/AIModels?retryWrites=true&w=majority&appName=Cluster0"
       }
     }
   },
