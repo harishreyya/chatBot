@@ -17,5 +17,5 @@ export default async function AfterAuthPage() {
     body: JSON.stringify({ email: session?.user?.email }),
   });
 
-  redirect("/chat");
+  redirect("/");
 }
