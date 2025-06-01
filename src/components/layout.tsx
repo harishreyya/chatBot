@@ -79,10 +79,10 @@ export default function Layout({ children }: LayoutProps) {
           <h3 className="text-lg font-medium text-gray-900 mb-2">Confirm Logout</h3>
           <p className="text-sm text-gray-600 mb-4">Are you sure you want to log out from your account?</p>
           <div className="flex justify-end gap-2">
-            <Button color="gray" onClick={() => setIsLogoutModalOpen(false)} className="cursor-pointer">
+            <Button onClick={() => setIsLogoutModalOpen(false)} className="cursor-pointer text-white bg-gray-600">
               Cancel
             </Button>
-            <Button color="red" onClick={handleLogout} className="cursor-pointer">
+            <Button onClick={handleLogout} className="cursor-pointer text-white bg-red-500">
               Yes, Logout
             </Button>
           </div>

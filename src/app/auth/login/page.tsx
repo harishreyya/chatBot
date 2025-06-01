@@ -111,8 +111,8 @@ export default function LoginPage() {
               <Button
                 onClick={handleEmailSubmit}
                 disabled={isSubmitting || !isValidEmail(email)}
-                color="blue"
-                  className={`${isSubmitting || !isValidEmail(email) ? 'cursor-wait' : 'cursor-pointer'}`}
+                // color="blue"
+                  className={`${isSubmitting || !isValidEmail(email) ? 'cursor-disable text-white bg-gray-600' : 'cursor-pointer text-white bg-blue-400'}`}
               >
                 {isSubmitting ? "Sending OTP..." : "Send OTP"}
               </Button>
@@ -126,7 +126,7 @@ export default function LoginPage() {
                 <TextInput
                   id="otp"
                   type="number"
-                  placeholder="••••••"
+                  placeholder="• • • • • •"
                   value={otp}
                   onChange={(e) => setOtp(e.target.value)}
                   maxLength={6}
@@ -135,8 +135,8 @@ export default function LoginPage() {
               <Button
                 onClick={handleOtpSubmit}
                 disabled={otp.length !== 6 || isVerifying}
-                color="green"
-                className={`${otp.length !== 6 || isVerifying ? 'cursor-wait' : 'cursor-pointer'}`}
+                // color="green"
+                className={`${otp.length !== 6 || isVerifying ? 'cursor-disable text-white bg-gray-600' : 'cursor-pointer text-white bg-green-500'}`}
               >
                 {isVerifying ? "Verifying..." : "Verify & Sign In"}
               </Button>
