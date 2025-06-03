@@ -49,7 +49,7 @@ export default function ChatPage() {
   const fetchChats = async () => {
     const res = await fetch("/api/chat/listChats");
     const data = await res.json();
-    setChats(data);
+    setChats(data.reverse());
   };
 
   const startNewChat = async () => {

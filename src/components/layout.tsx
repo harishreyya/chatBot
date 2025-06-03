@@ -8,7 +8,7 @@ import { FiUser } from "react-icons/fi";
 import { FaRobot } from "react-icons/fa";
 import Link from "next/link";
 import SkeletonLoader from "@/components/SkeletonLoader";
-
+import "../app/chat/[chatId]/chat.css"
 interface LayoutProps {
   children: ReactNode;
 }
@@ -33,36 +33,53 @@ export default function Layout({ children }: LayoutProps) {
   };
 
   return (
-    <div className="min-h-screen bg-blue-50 flex flex-col">
-      <header className="flex items-center justify-between bg-gray-400 px-8 py-4 shadow-md">
-      <Link href="/chat">  <div className="flex items-center gap-3">
-          <FaRobot className="h-8 w-8 text-gray-600" />
-          <span className="text-2xl font-bold text-white">Ask Any ✍️🧠</span>
-          {/*<span className="ml-4 pl-4 border-gray-600 text-lg text-gray-300">Dashboard</span>*/}
-        </div></Link>
-
-        {/* <Link href="/chat" className="px-4 py-2 bg-green-600 text-white rounded">
-          Go to Chatbot
-        </Link> */}
+    <div className="min-h-screen bg-gradient-to-r from-blue-50 to-green-50 flex flex-col ">
+      <header className="header-container flex items-center justify-between p-4 md:p-6 shadow-lg z-5 ">
+        <Link href="/" className="flex items-center gap-3">
+          <FaRobot className="h-9 w-9 text-white drop-shadow-md" />
+          <span className="text-3xl font-extrabold text-white tracking-wide">
+            Ask Any ✍️🧠
+          </span>
+        </Link>
 
         {session?.user?.email && (
           <div className="relative">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="flex items-center focus:outline-none hover:opacity-80 transition"
+              className="flex items-center focus:outline-none hover:scale-105 transition-transform"
             >
               <FiUser className="h-8 w-8 text-white cursor-pointer" />
             </button>
 
             {isMenuOpen && (
-              <div className="absolute right-0 mt-2 w-52 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
-                <div className="p-4 border-b text-gray-800 text-sm">{session.user.email}</div>
+              <div className="menu-dropdown absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 z-50 overflow-hidden transition-transform duration-300">
+                <div className="p-3 border-b text-gray-800 text-sm font-medium bg-gray-200">
+                  {session.user.email}
+                </div>
+                <Link
+                  href="/"
+                  className="block px-4 py-3 text-gray-700 text-sm font-medium hover:bg-gray-100"
+                >
+                  Home
+                </Link>
+                <Link
+                  href="/chat"
+                  className="block px-4 py-3 text-green-700 text-sm font-medium hover:bg-red-200 "
+                >
+                  Chat Bot
+                </Link>
+                <Link
+                  href="/textToImage"
+                  className="block px-4 py-3 text-blue-700 text-sm font-medium hover:bg-blue-100 "
+                >
+                  Text to Image
+                </Link>
                 <button
                   onClick={() => {
                     setIsMenuOpen(false);
                     setIsLogoutModalOpen(true);
                   }}
-                  className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 rounded-b-lg cursor-pointer"
+                  className="block w-full text-left px-4 py-3 text-sm font-medium text-red-600 hover:bg-gray-200 hover:text-red-200 cursor-pointer"
                 >
                   Logout
                 </button>
@@ -77,7 +94,7 @@ export default function Layout({ children }: LayoutProps) {
       <Modal show={isLogoutModalOpen} onClose={() => setIsLogoutModalOpen(false)} size="sm" popup>
         <div className="p-4">
           <h3 className="text-lg font-medium text-gray-900 mb-2">Confirm Logout</h3>
-          <p className="text-sm text-gray-600 mb-4">Are you sure you want to log out from your account?</p>
+          <p className="text-sm text-gray-600 mb-4">Are you sure you want to log out?</p>
           <div className="flex justify-end gap-2">
             <Button onClick={() => setIsLogoutModalOpen(false)} className="cursor-pointer text-white bg-gray-600">
               Cancel
@@ -91,3 +108,4 @@ export default function Layout({ children }: LayoutProps) {
     </div>
   );
 }
+

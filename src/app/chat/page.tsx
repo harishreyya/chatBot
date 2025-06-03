@@ -26,7 +26,7 @@ export default function ChatListPage() {
     setIsLoadingChats(true);
     const res = await fetch("/api/chat/listChats");
     const data = await res.json();
-    setChats(data);
+    setChats(data.reverse());
     setIsLoadingChats(false);
   };
 
@@ -78,7 +78,7 @@ export default function ChatListPage() {
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto px-6 py-4 relative z-10">
+        <div className="flex-1 overflow-y-auto px-6 py-4 relative z-4">
           {isLoadingChats ? (
             <div className="flex flex-col space-y-4 items-center">
               <h1 className="text-xl font-semibold mb-4 text-gray-800">
