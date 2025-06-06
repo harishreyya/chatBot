@@ -38,7 +38,7 @@ export default function Layout({ children }: LayoutProps) {
         <Link href="/" className="flex items-center gap-3">
           <FaRobot className="h-9 w-9 text-white drop-shadow-md" />
           <span className="text-3xl font-extrabold text-white tracking-wide">
-            Ask Any ✍️🧠
+            Ask Any ✍️
           </span>
         </Link>
 
