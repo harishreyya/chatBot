@@ -40,7 +40,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       ]
     });
 
-    console.log('OpenAI API response:', assistantReply);
+    // console.log('OpenAI API response:', assistantReply);
 
     res.status(200).json({ assistantReply });
   } catch (error: any) {
