@@ -9,6 +9,9 @@ export default function TextToImage() {
   const [images, setImages] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [justGeneratedImage, setJustGeneratedImage] = useState<string | null>(null);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
+  const [loadingDelete, setLoadingDelete] = useState(false);
  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const fetchGeneratedImages = async () => {
@@ -66,15 +69,27 @@ export default function TextToImage() {
     }
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this image?")) return;
-    const res = await fetch(`/api/textToImage/deleteImage/${id}`, { method: "DELETE" });
+  const handleDeleteConfirm = async () => {
+    if (!selectedImageId) return;
+    setLoadingDelete(true)
+    const res = await fetch(`/api/textToImage/deleteImage/${selectedImageId}`, {
+      method: "DELETE",
+    });
+    setLoadingDelete(false);
     if (res.ok) {
       fetchGeneratedImages();
     } else {
       alert("Failed to delete image");
     }
+    setShowModal(false);
+    setSelectedImageId(null);
   };
+
+  const handleDelete = (id: string) => {
+    setSelectedImageId(id);
+    setShowModal(true);
+  };
+
 
   return (
     <Layout>
@@ -139,6 +154,30 @@ export default function TextToImage() {
             </div>
           ))}
         </div>
+
+          {showModal && (
+          <div className="fixed inset-0 bg-[rgba(0,0,0,0.5)] z-50 flex items-center justify-center">
+            <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
+              <h2 className="text-lg font-semibold mb-4 text-gray-800">Are you sure you want to delete this image?</h2>
+              <div className="flex justify-center gap-4">
+                <button
+                  onClick={handleDeleteConfirm}
+                  disabled={loadingDelete}
+                  className={`text-white px-4 py-2 rounded ${loadingDelete ? "bg-red-400 cursor-not-allowed" : "cursor-pointer bg-red-500 hover:bg-red-600" }`}
+                >
+                  {loadingDelete ? "Deleting..." : "Yes, Delete"}
+                </button>
+                <button
+                  onClick={() => setShowModal(false)}
+                  disabled={loadingDelete}
+                  className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded cursor-pointer"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </Layout>
   );
