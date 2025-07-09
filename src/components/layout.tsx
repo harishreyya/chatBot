@@ -91,8 +91,8 @@ export default function Layout({ children }: LayoutProps) {
 
       <main className="flex-1 flex flex-col">{children}</main>
 
-      <Modal show={isLogoutModalOpen} onClose={() => setIsLogoutModalOpen(false)} size="sm" popup>
-        <div className="p-4">
+      <Modal show={isLogoutModalOpen} onClose={() => setIsLogoutModalOpen(false)} size="sm" popup className="bg-[rgba(0,0,0,0.7)]">
+        <div className="p-4 ">
           <h3 className="text-lg font-medium text-gray-900 mb-2">Confirm Logout</h3>
           <p className="text-sm text-gray-600 mb-4">Are you sure you want to log out?</p>
           <div className="flex justify-end gap-2">
