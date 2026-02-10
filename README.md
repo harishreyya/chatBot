@@ -70,8 +70,7 @@ git clone https://github.com/harishreyya/chatBot.git
 # Install dependencies
 npm install
 
-# Configure environment variables
-# (MongoDB, NextAuth, AI APIs, Cloudinary)
+# Configure environment variables (MongoDB, NextAuth, AI APIs, Cloudinary)
 
 # Run locally
 npm run dev
